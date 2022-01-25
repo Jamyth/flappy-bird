@@ -5,9 +5,24 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Vite Generator</title>
+        <style>
+            html,
+            body {
+                margin: 0;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #container {
+                width: 1280px;
+                height: 720px;
+            }
+        </style>
     </head>
     <body>
-        <div id="app"></div>
+        <div id="container"></div>
         <script type="module" src="/index.ts"></script>
     </body>
 </html>

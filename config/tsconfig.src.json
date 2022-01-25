@@ -10,7 +10,9 @@
         "baseUrl": "../src",
 
         "importsNotUsedAsValues": "preserve",
-        "isolatedModules": true
+        "isolatedModules": true,
+
+        "strictPropertyInitialization": false
     },
     "include": ["../src"]
 }
