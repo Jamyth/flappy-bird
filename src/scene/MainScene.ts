@@ -58,7 +58,6 @@ export class MainScene extends Scene {
         this.bird.gameObject.setScale(0.1).setDepth(10);
 
         this.physics.add.existing(this.ground.gameObject, true);
-        this.physics.add.existing(this.bird.gameObject);
 
         this.spaceKey.on('down', () => {
             this.bird.setDy(-5);
@@ -110,7 +109,10 @@ export class MainScene extends Scene {
         this.pipes.forEach((pair) => {
             const pipes = pair.getPipes();
             pipes.forEach((pipe) => {
-                this.physics.collide(this.bird.gameObject, pipe.gameObject, onCollide);
+                if (this.bird.onCollideWith(pipe)) {
+                    console.info(pipe);
+                    onCollide();
+                }
             });
         });
         this.physics.collide(this.bird.gameObject, this.ground.gameObject, onCollide);

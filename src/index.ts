@@ -15,6 +15,9 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     height: HEIGHT,
     physics: {
         default: 'arcade',
+        arcade: {
+            debug: true,
+        },
     },
     pixelArt: true,
     scale: {
