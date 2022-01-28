@@ -57,6 +57,10 @@ export class Bird extends Component<Phaser.GameObjects.Image> {
 
     update(dt: number): void {
         this.dy = this.dy + this.gravity * dt;
-        this.gameObject.setY(this.gameObject.y + this.dy);
+        this.y = this.gameObject.y + this.dy;
+    }
+
+    render(): void {
+        this.gameObject.setY(this.y);
     }
 }

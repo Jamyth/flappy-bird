@@ -31,6 +31,9 @@ export class ParallaxImage extends Component<Phaser.GameObjects.Image> {
 
     update(dt: number): void {
         this.scrollX = (this.scrollX + this.speed * dt) % this.loopingPoint;
+    }
+
+    render(): void {
         this.gameObject.setX(this.scrollX);
     }
 }

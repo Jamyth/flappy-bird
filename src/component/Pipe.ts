@@ -51,6 +51,9 @@ export class Pipe extends Component<Phaser.GameObjects.Image> {
 
     update(dt: number): void {
         this.x += this.speed * dt;
+    }
+
+    render(): void {
         this.gameObject.setX(this.x);
     }
 }

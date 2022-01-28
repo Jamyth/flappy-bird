@@ -12,6 +12,7 @@ export class PipePair extends Component {
     private topPipe: Pipe;
     private bottomPipe: Pipe;
     private isRemoved: boolean;
+    private isScored: boolean;
 
     constructor({ y }: PipePairOptions) {
         super();
@@ -38,6 +39,14 @@ export class PipePair extends Component {
         return this.isRemoved;
     }
 
+    getIsScored() {
+        return this.isScored;
+    }
+
+    setIsScored(isScored: boolean) {
+        this.isScored = isScored;
+    }
+
     destroy() {
         this.topPipe.gameObject.destroy();
         this.bottomPipe.gameObject.destroy();
@@ -57,6 +66,13 @@ export class PipePair extends Component {
         } else {
             this.topPipe.update(dt);
             this.bottomPipe.update(dt);
+        }
+    }
+
+    render(): void {
+        if (!this.isDestroyed) {
+            this.topPipe.render();
+            this.bottomPipe.render();
         }
     }
 }

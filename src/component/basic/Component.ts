@@ -7,4 +7,5 @@ export abstract class Component<T = never> {
 
     abstract create(scene: Phaser.Scene): this;
     abstract update(dt: number): void;
+    abstract render(): void;
 }
