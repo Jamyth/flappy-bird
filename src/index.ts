@@ -16,8 +16,12 @@ const gameConfig: Phaser.Types.Core.GameConfig = {
     physics: {
         default: 'arcade',
         arcade: {
-            debug: true,
+            fps: 60,
         },
+    },
+    fps: {
+        target: 60,
+        forceSetTimeOut: true,
     },
     pixelArt: true,
     scale: {

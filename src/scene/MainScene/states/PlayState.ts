@@ -31,6 +31,8 @@ export class PlayState extends State {
         this.spaceKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         this.spaceKey.on('down', () => {
             this.bird.setDy(-5);
+            this.bird.setDAngle(-45);
+            this.scene.sound.play(AssetKey.JUMP, { volume: 0.04 });
         });
 
         this.score = 0;
@@ -86,6 +88,7 @@ export class PlayState extends State {
             if (pair.getPipes()[0].getX() + Pipe.PIPE_WIDTH <= this.bird.gameObject.x && !pair.getIsScored()) {
                 this.score += 1;
                 this.scoreText.setText(`Score: ${this.score}`);
+                this.scene.sound.play(AssetKey.SCORE, { volume: 0.15 });
                 pair.setIsScored(true);
             }
 
@@ -96,6 +99,7 @@ export class PlayState extends State {
 
     private detectCollision() {
         const onCollide = () => {
+            this.scene.sound.play(AssetKey.DEATH);
             this.stateMachine.change('gameOver', { score: this.score });
         };
 

@@ -10,6 +10,7 @@ interface BirdOptions {
 export class Bird extends Component<Phaser.GameObjects.Image> {
     private imageKey: string;
     private dy: number;
+    private dAngle: number;
     private gravity: number;
     private x: number;
     private y: number;
@@ -19,10 +20,15 @@ export class Bird extends Component<Phaser.GameObjects.Image> {
         this.imageKey = imageKey;
         this.gravity = gravity;
         this.dy = 0;
+        this.dAngle = 0;
     }
 
     setDy(dy: number) {
         this.dy = dy;
+    }
+
+    setDAngle(dAngle: number) {
+        this.dAngle = dAngle;
     }
 
     create(scene: Phaser.Scene): this {
@@ -58,9 +64,11 @@ export class Bird extends Component<Phaser.GameObjects.Image> {
     update(dt: number): void {
         this.dy = this.dy + this.gravity * dt;
         this.y = this.gameObject.y + this.dy;
+        this.dAngle = this.dAngle + 90 * dt;
     }
 
     render(): void {
         this.gameObject.setY(this.y);
+        this.gameObject.setAngle(this.dAngle);
     }
 }

@@ -7,10 +7,12 @@ import { TitleState } from './states/TitleState';
 import { CountdownState } from './states/CountdownState';
 import { PlayState } from './states/PlayState';
 import { GameOverState } from './states/GameOverState';
+import { Text } from 'component/Text';
 
 export class MainScene extends Scene {
     private background: ParallaxImage;
     private ground: ParallaxImage;
+    private fpsText: Text;
     private stateMachine: StateMachine;
 
     constructor() {
@@ -22,6 +24,12 @@ export class MainScene extends Scene {
         this.load.image(AssetKey.GROUND, 'ground.png');
         this.load.image(AssetKey.BIRD, 'bird.png');
         this.load.image(AssetKey.PIPE, 'pipe.png');
+        this.load.audio(AssetKey.MUSIC, 'music.wav');
+        this.load.audio(AssetKey.JUMP, 'jump.wav');
+        this.load.audio(AssetKey.SCORE, 'score.wav');
+        this.load.audio(AssetKey.DEATH, 'death.wav');
+        this.load.audio(AssetKey.COUNT, 'count.wav');
+        this.load.audio(AssetKey.START, 'start.wav');
     }
 
     create(scene: Phaser.Scene, data: object): void {
@@ -42,6 +50,9 @@ export class MainScene extends Scene {
 
         this.physics.add.existing(this.ground.gameObject);
 
+        this.fpsText = new Text(Math.floor(this.game.loop.actualFps), this.scale.width - 40, 10).create(this);
+        this.fpsText.gameObject.setColor('#00ff00');
+
         this.stateMachine = new StateMachine(this, {
             title: new TitleState(),
             countdown: new CountdownState(),
@@ -50,12 +61,15 @@ export class MainScene extends Scene {
         });
 
         this.stateMachine.change('title');
+
+        this.sound.play(AssetKey.MUSIC, { loop: true, volume: 0.03 });
     }
 
     update(time: number, delta: number): void {
         const _delta = delta / 1000;
         this.background.update(_delta);
         this.ground.update(_delta);
+        this.fpsText.setText(Math.floor(this.game.loop.actualFps));
 
         this.stateMachine.update(_delta);
 
@@ -63,5 +77,6 @@ export class MainScene extends Scene {
 
         this.background.render();
         this.ground.render();
+        this.fpsText.render();
     }
 }
