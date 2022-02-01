@@ -1,4 +1,4 @@
-import type Phaser from 'phaser';
+import Phaser from 'phaser';
 import { Scene } from 'component/basic/Scene';
 import { ParallaxImage } from 'component/ParallaxImage';
 import { AssetKey } from 'util/AssetKey';
@@ -13,6 +13,7 @@ export class MainScene extends Scene {
     private background: ParallaxImage;
     private ground: ParallaxImage;
     private fpsText: Text;
+    private muteKey: Phaser.Input.Keyboard.Key;
     private stateMachine: StateMachine;
 
     constructor() {
@@ -63,6 +64,11 @@ export class MainScene extends Scene {
         this.stateMachine.change('title');
 
         this.sound.play(AssetKey.MUSIC, { loop: true, volume: 0.03 });
+
+        this.muteKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
+        this.muteKey.on('down', () => {
+            this.sound.mute = !this.sound.mute;
+        });
     }
 
     update(time: number, delta: number): void {

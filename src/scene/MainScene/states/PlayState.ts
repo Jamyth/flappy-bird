@@ -46,6 +46,7 @@ export class PlayState extends State {
     }
 
     exit(): void {
+        this.spaceKey.destroy();
         this.bird.gameObject.destroy();
         this.pipes.forEach((_) => _.destroy());
         this.scoreText.gameObject.destroy();
